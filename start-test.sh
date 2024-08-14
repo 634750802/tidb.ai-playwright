@@ -38,4 +38,7 @@ cat .credentials
 echo -e "$TAG Start components"
 docker compose up -d redis frontend backend background
 
+echo -e "$TAG Wait 3 seconds for TiDB.ai starting up"
+sleep 3
+
 npm start

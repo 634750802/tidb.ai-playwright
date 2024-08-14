@@ -62,10 +62,7 @@ test('bootstrap', async ({ page }) => {
 
       await createButton.click();
 
-      await page.waitForTimeout(3000);
-
-      expect(await page.getByText('Setup default LLM').locator('.lucide-circle-alert').count()).toBe(0)
-
+      await header.locator('.lucide-circle-alert').waitFor({ state: 'detached' })
       await page.screenshot({ path: 'screenshots/0-bootstrap/6-Setup-Default-LLM-Succeed.png' });
     }
   }
@@ -97,10 +94,7 @@ test('bootstrap', async ({ page }) => {
 
       await createButton.click();
 
-      await page.waitForTimeout(3000);
-
-      expect(await header.locator('.lucide-circle-alert').count()).toBe(0)
-
+      await header.locator('.lucide-circle-alert').waitFor({ state: 'detached' })
       await page.screenshot({ path: 'screenshots/0-bootstrap/9-Setup-Default-Embedding-Model-Succeed.png' });
     }
   }
@@ -128,9 +122,7 @@ test('bootstrap', async ({ page }) => {
 
       await createButton.click();
 
-      await page.waitForTimeout(3000);
-
-      expect(await header.locator('.lucide-circle-alert').count()).toBe(0)
+      await header.locator('.lucide-circle-alert').waitFor({ state: 'detached' })
       await page.screenshot({ path: 'screenshots/0-bootstrap/11-Setup-Datasource-Succeed.png' });
     }
   }
