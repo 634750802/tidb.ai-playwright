@@ -12,7 +12,7 @@ TAG="${F_BOLD}${F_UNDERLINED}${C_AQUA}[TiDB.AI Integration Test]${NO_FORMAT}"
 # Cleanups
 function clean_up {
   ARG=$?
-  echo "[TiDB.AI Integration Test] Cleaning up..."
+  echo "$TAG Cleaning up..."
   docker compose down frontend background backend tidb redis
   exit $ARG
 }
@@ -26,10 +26,10 @@ echo -e "$TAG Wait 15 seconds for TiDB starting up"
 sleep 15
 
 echo -e "$TAG Execute migrations"
-docker compose run backend /bin/sh -c "alembic upgrade head" > migration.stdout 2> migration.stderr
+docker compose run --rm backend /bin/sh -c "alembic upgrade head"
 
 echo -e "$TAG Execute bootstrap"
-docker compose run backend /bin/sh -c "python bootstrap.py" > bootstrap.stdout 2> bootstrap.stderr
+docker compose run --rm backend /bin/sh -c "python bootstrap.py" > bootstrap.stdout
 
 echo -e "$TAG Extract initial username and password"
 cat bootstrap.stdout | grep IMPORTANT | sed 's/^.*email: \(.*\) and password: \(.*\),.*$/USERNAME=\1\nPASSWORD=\2/' > .credentials
