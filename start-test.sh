@@ -22,8 +22,11 @@ trap clean_up EXIT
 echo -e "$TAG Starting TiDB"
 docker compose up -d tidb
 
-echo -e "$TAG Wait 15 seconds for TiDB starting up"
-sleep 15
+echo -e "$TAG Wait until TiDB ready..."
+while ! docker compose exec tidb /bin/bash -c "curl http://127.0.0.1:10080/status" > /dev/null 2>/dev/null
+do
+  sleep 1
+done
 
 echo -e "$TAG Execute migrations"
 docker compose run --rm backend /bin/sh -c "alembic upgrade head"
@@ -38,7 +41,10 @@ cat .credentials
 echo -e "$TAG Start components"
 docker compose up -d redis frontend backend background
 
-echo -e "$TAG Wait 3 seconds for TiDB.ai starting up"
-sleep 3
+echo -e "$TAG Wait until tidb.ai ready..."
+while ! curl http://127.0.0.1:3000 > /dev/null 2>/dev/null
+do
+  sleep 1
+done
 
 npm start
