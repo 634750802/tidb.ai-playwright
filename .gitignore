@@ -6,6 +6,8 @@ node_modules/
 
 .idea
 
+.env.local
+
 # Internal output
 .credentials
 *.stdout

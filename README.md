@@ -4,9 +4,11 @@
 
 - Docker compose
 - NodeJS env
+- OpenAI Api Key
 
 ```bash
 npm i
+echo OPENAI_API_KEY=sk-*** > .env.local
 ```
 
 ## Usage
