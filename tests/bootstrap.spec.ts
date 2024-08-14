@@ -65,7 +65,7 @@ test('bootstrap', async ({ page }) => {
       try {
         await header.locator('.lucide-circle-alert').waitFor({ state: 'detached', timeout: 10000 })
       } catch (e) {
-        throw new Error(await page.getByText('Failed to').textContent({ timeout: 1000 }))
+        throw new Error(await page.getByText('Failed to').locator('..').textContent({ timeout: 1000 }))
       }
       await page.screenshot({ path: 'screenshots/0-bootstrap/6-Setup-Default-LLM-Succeed.png' });
     }
@@ -101,7 +101,7 @@ test('bootstrap', async ({ page }) => {
       try {
         await header.locator('.lucide-circle-alert').waitFor({ state: 'detached', timeout: 10000 })
       } catch (e) {
-        throw new Error(await page.getByText('Failed to').textContent({ timeout: 1000 }))
+        throw new Error(await page.getByText('Failed to').locator('..').textContent({ timeout: 1000 }))
       }
       await page.screenshot({ path: 'screenshots/0-bootstrap/9-Setup-Default-Embedding-Model-Succeed.png' });
     }
